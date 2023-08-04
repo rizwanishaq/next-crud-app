@@ -29,9 +29,6 @@ const Nav = () => {
             Create Post
           </Link>
 
-          <Link href="/generate-image" className="black_btn">
-            Generate Image
-          </Link>
           {/* <Grip /> */}
         </div>
       </div>
@@ -49,13 +46,6 @@ const Nav = () => {
                 onClick={() => setToggleDropdown(false)}
               >
                 Create Prompt
-              </Link>
-              <Link
-                href="/generate-image"
-                className="dropdown_link"
-                onClick={() => setToggleDropdown(false)}
-              >
-                Generate Image
               </Link>
             </div>
           )}
