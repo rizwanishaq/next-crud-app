@@ -29,7 +29,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           <h3 className="font-satoshi font-semibold text-gray-900">
             {post._id}
           </h3>
-          <p className="font-inter text-sm text-gray-500">{post.prompt}</p>
+          <p className="font-inter text-sm text-gray-500">{post.tag}</p>
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <Image

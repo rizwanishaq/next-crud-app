@@ -5,8 +5,11 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Prompt_Engineering",
-  description: "Discover & Share AI Prompts",
+  title: "RiisBiTech",
+  description: "Discover & Share AI ideas",
+  keywords:
+    "AI, AI ideas, AI research, AI research ideas, AI research projects",
+  author: "Rizwan Ishaq",
 };
 
 export default function RootLayout({ children }) {

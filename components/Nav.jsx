@@ -17,9 +17,9 @@ const Nav = () => {
           alt="Promptopia Logo"
           width={30}
           height={30}
-          className="object-contain"
+          className="object-contain hover:animate-spin"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="logo_text">RiIsBiTech</p>
       </Link>
 
       {/* Desktop  Navigation */}
@@ -29,9 +29,10 @@ const Nav = () => {
             Create Post
           </Link>
 
-          {/* <Link href="/profile"> */}
-          <Grip />
-          {/* </Link> */}
+          <Link href="/generate-image" className="black_btn">
+            Generate Image
+          </Link>
+          {/* <Grip /> */}
         </div>
       </div>
 
@@ -48,6 +49,13 @@ const Nav = () => {
                 onClick={() => setToggleDropdown(false)}
               >
                 Create Prompt
+              </Link>
+              <Link
+                href="/generate-image"
+                className="dropdown_link"
+                onClick={() => setToggleDropdown(false)}
+              >
+                Generate Image
               </Link>
             </div>
           )}

@@ -43,7 +43,7 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      {/* <form className="relative w-full flex-center">
         <input
           type="text"
           placeholder="Search for a tag or a  prompt"
@@ -52,7 +52,7 @@ const Feed = () => {
           required
           className="search_input peer"
         />
-      </form>
+      </form> */}
       <PromptCardList
         data={posts}
         handleTagClick={handleSearchChange}
