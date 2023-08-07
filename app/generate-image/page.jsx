@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Loader from "@components/Loader";
+
 // import axios from "axios";
 
 const GenerateImagePage = () => {

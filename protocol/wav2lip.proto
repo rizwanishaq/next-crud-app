@@ -1,0 +1,101 @@
+// The syntax for this file is proto3
+syntax = "proto3";
+
+package wav2lip.v1;
+
+
+message information {
+    string error = 1;
+    string warning=2;
+    bool success = 4;
+}
+
+
+message wav2lipVideoRequest {
+    string uid = 1;
+    string video_url = 2;
+    string name = 3;
+}
+
+message wav2lipVideoResponse {
+    string uid=1;
+    string video_url=2;
+    string name=3;
+    bool success=4;
+    information update_information=5;
+}
+
+
+message Wav2LipRequest {
+    string uid = 1;
+    string audio_url = 2;
+    string name = 3;
+    bytes background_image = 4;
+    bytes watermark_image = 5;
+    string driving_video_url=6;
+    bytes ref_image = 7;
+    bool hd = 8;
+
+}
+
+
+message Wav2LipResponse {
+    string uid = 1;
+    string audio_url = 2;
+    string video_url = 3;
+    string error = 4;
+}
+
+message Wav2LipDeleteRequest {
+    string uid = 1;
+    string name = 2;
+}
+
+message Wav2LipDeleteReponse {
+    string uid = 1;
+    string name = 2;
+    bool status=3;
+}
+
+message Wav2LipListRequest {
+    string uid = 1;
+}
+
+message Wav2LipListResponse {
+    string uid = 1;
+    repeated string videos = 2;
+}
+
+
+// Stream request has uniuqe ID (uid) for logging and trakcing purpuoses
+// name of the video we want to stream with audio
+// the audio_content (50 msec frames with 16Khz sampling frequency)
+message Wav2LipStreamRequest {
+    string uid = 1;
+    string name = 2;
+    bytes audio_contents=3;
+    bytes background_image = 4;
+    bytes watermark_image = 5;
+}
+
+
+// Stream response has the same uid as in the request
+// name as given in request
+// audio_contents (50 msec audio frame with 16Khz sampling frequency)
+// the generated image corresponding 
+message Wav2LipStreamResponse {
+    string uid = 1;
+    string name = 2;
+    bytes audio_contents = 3;
+    bytes image = 4;
+}
+
+
+// Services for the current system
+service Wav2Lip {
+    rpc predict(Wav2LipRequest) returns (Wav2LipResponse) {}   
+    rpc update(wav2lipVideoRequest) returns (wav2lipVideoResponse) {}
+    rpc delete(Wav2LipDeleteRequest) returns (Wav2LipDeleteReponse) {}
+    rpc videoslist(Wav2LipListRequest) returns ( Wav2LipListResponse) {}
+    rpc wav2lipStream(stream Wav2LipStreamRequest) returns (stream Wav2LipStreamResponse) {}
+}

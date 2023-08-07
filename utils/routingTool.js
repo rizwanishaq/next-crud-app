@@ -13,6 +13,6 @@ export const tools = [
   {
     label: "Video Generation",
     icon: VideoIcon,
-    href: "/video",
+    href: "/generate-video",
   },
 ];

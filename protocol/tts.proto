@@ -1,0 +1,216 @@
+// The syntax for this file is proto3
+syntax = "proto3";
+
+package utopia.texttospeech.v1;
+
+message Empty{}
+
+message SynthesisInput {
+    string text = 1;
+    string ssml = 2;
+}
+
+
+// Gender of the voices 
+enum SsmlVoiceGender {
+    // An unspecified gender
+    SSML_VOICE_GENDER_UNSPECIFIED = 0; 
+    // A male voice
+    MALE = 1;  
+    // A female voice
+    FEMALE = 2;
+    // A gender-netural voice
+    NEUTRAL = 3;
+}
+
+
+message VoiceSelectionParams {
+    string language_code = 1;
+    string name = 2;
+    SsmlVoiceGender ssml_gender = 3;
+}
+
+
+ // Encoding type default is unspecified
+ enum AudioEncoding {
+    AUDIO_ENCODING_UNSPECIFIED = 0;
+    LINEAR16 = 1;
+    MP3 = 2;
+    OGG_OPUS = 3;
+}
+
+message AudioConfig {
+    AudioEncoding audio_encoding = 1;
+    double speaking_rate = 2;
+    double pitch = 3;
+    double volume_gain_db = 4;
+    int32 sample_rate_hertz = 5;
+    string effects_profile_id = 6;
+}
+
+
+
+
+// SynthesizeSpeech Request 
+message SynthesizeSpeechRequest {
+    SynthesisInput input = 1;
+    // Description of which voice to use for a synthesis request.
+    VoiceSelectionParams voice = 2;
+    // Audio Configuration
+    AudioConfig audio_config = 3;
+}
+
+
+
+// SynthesizeSpeech service response
+message SynthesizeSpeechResponse {
+    bytes audio_content = 1;
+    int32 num_block = 2;
+    int32 total_blocks = 3;
+}
+
+// ListVoice Service Requst
+message ListVoicesRequest {
+    string language_code = 1;
+}
+
+// ListVoice response
+message ListVoicesResponse {
+    repeated string voices = 1;
+}
+
+
+
+// ListVoice response
+message ListLanguagesResponse {
+    repeated string languages = 1;
+}
+
+
+
+message lan2 {
+    repeated string male = 1;
+    repeated string female = 2;
+}
+
+message LAN {
+    lan2 test1 = 1;
+    
+}
+
+message DetailsVoicesResponse {
+    string details_voices = 1;
+}
+
+
+// DetailsVoices response
+//message DetailsVoicesResponse {
+//    LAN details_voices = 1;
+//}
+
+// List of services
+service TextToSpeech {
+    // Synthesis speech service with SynthesizeSpeechRequest and SynthesizeSpeechResponse
+    rpc SynthesizeSpeech(SynthesizeSpeechRequest) returns (stream SynthesizeSpeechResponse) {}
+    // Service to provide the list of voices in tts
+    rpc ListVoices(ListVoicesRequest) returns (ListVoicesResponse) {}
+    rpc ListLanguages(Empty) returns (ListLanguagesResponse) {}
+    rpc DetailsVoices(Empty) returns (DetailsVoicesResponse) {} 
+}
+
+/*
+// The syntax for this file is proto3
+syntax = "proto3";
+
+package utopia.texttospeech.v1;
+
+message Empty{}
+
+message SynthesisInput {
+    string text = 1;
+    string ssml = 2;
+}
+
+// Gender of the voices 
+enum SsmlVoiceGender {
+    SSML_VOICE_GENDER_UNSPECIFIED = 0; // An unspecified gender
+    MALE = 1; // A male voice
+    FEMALE = 2; // A female voice
+    NEUTRAL = 3; // A gender-netural voice
+}
+
+message VoiceSelectionParams {
+    string language_code = 1;
+    string name = 2;
+    SsmlVoiceGender ssml_gender = 3;
+}
+
+ // Encoding type default is unspecified
+ enum AudioEncoding {
+    AUDIO_ENCODING_UNSPECIFIED = 0;
+    LINEAR16 = 1;
+    MP3 = 2;
+    OGG_OPUS = 3;
+}
+
+message AudioConfig {
+    AudioEncoding audio_encoding = 1;
+    double speaking_rate = 2;
+    double pitch = 3;
+    double volume_gain_db = 4;
+    int32 sample_rate_hertz = 5;
+    string effects_profile_id = 6;
+}
+
+// SynthesizeSpeech Request 
+message SynthesizeSpeechRequest {
+    SynthesisInput input = 1;
+    VoiceSelectionParams voice = 2; // Description of which voice to use for a synthesis request
+    AudioConfig audio_config = 3; // Audio Configuration
+}
+
+// SynthesizeSpeech service response
+message SynthesizeSpeechResponse {
+    bytes audio_content = 1;
+    int32 num_block = 2;
+    int32 total_blocks = 3;
+}
+
+// ListVoice Service Requst
+message ListVoicesByLanguageRequest {
+    string language_code = 1;
+}
+
+// ListVoice response
+message ListVoicesResponse {
+    repeated string voices = 1;
+}
+
+// ListVoice response
+message ListLanguagesResponse {
+    repeated string languages = 1;
+}
+
+message HostData {
+    string language = 1;
+    repeated string voices = 2;
+}
+
+message Hosts {
+    string host = 1;
+    repeated HostData data = 2;
+}
+
+message ListHostsAndLanguagesAndVoicesResponse {
+    repeated Hosts hosts = 1;
+}
+
+// List of services
+service TextToSpeech {
+    rpc SynthesizeSpeech(SynthesizeSpeechRequest) returns (stream SynthesizeSpeechResponse) {} // Synthesis speech service with SynthesizeSpeechRequest and SynthesizeSpeechResponse
+    rpc ListVoices(Empty) returns (ListVoicesResponse) {} 
+    rpc ListVoicesByLanguage(ListVoicesByLanguageRequest) returns (ListVoicesResponse) {} // Service to provide the list of voices in tts
+    rpc ListLanguages(Empty) returns (ListLanguagesResponse) {}
+    rpc ListHostsAndLanguagesAndVoices(Empty) returns (ListHostsAndLanguagesAndVoicesResponse) {} 
+}
+*/

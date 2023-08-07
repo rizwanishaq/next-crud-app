@@ -17,10 +17,12 @@ const Home = () => {
       </p>
       <div className="mt-1 prompt_layout">
         {tools.map((tool) => (
-          <div className="flex justify-between items-start gap-5">
+          <div
+            className="flex justify-between items-start gap-5"
+            key={tool.href}
+          >
             <div
               onClick={() => router.push(tool.href)}
-              key={tool.href}
               className="p-4 border-black/5 flex items-center justify-between hover:shadow-md transition cursor-pointer"
             >
               <div className="flex items-center gap-x-4">
