@@ -4,6 +4,7 @@ import SelectLanguages from "@components/SelectLanguages";
 import SelectVideo from "@components/SelectVideo";
 import SelectVoice from "@components/SelectVoice";
 import Loader from "@components/Loader";
+import { Suspense } from "react";
 const VideoPage = () => {
   const [languages, setLanguages] = useState([]);
   const [voices, setVoices] = useState([]);
@@ -96,24 +97,26 @@ const VideoPage = () => {
             </div>
           </form>
         </div>
-        <div className="mt-1 w-full max-w-lg flex flex-col gap-1 glassmorphism">
-          <div className="h-full max-w-lg">
-            {avatar ? (
-              <video
-                src={avatar}
-                controls
-                width={512}
-                height={512}
-                className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-              />
-            ) : (
-              <Loader
-                desc="Loading video"
-                className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-              />
-            )}
+        <Suspense fallback={<div>Loading repo...</div>}>
+          <div className="mt-1 w-full max-w-lg flex flex-col gap-1 glassmorphism">
+            <div className="h-full max-w-lg">
+              {avatar ? (
+                <video
+                  src={avatar}
+                  controls
+                  width={512}
+                  height={512}
+                  className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+                />
+              ) : (
+                <Loader
+                  desc="Loading video"
+                  className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+                />
+              )}
+            </div>
           </div>
-        </div>
+        </Suspense>
       </div>
     </section>
   );
