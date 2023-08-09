@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import SelectLanguages from "@components/SelectLanguages";
 import SelectVideo from "@components/SelectVideo";
 import SelectVoice from "@components/SelectVoice";
-import Loader from "@components/Loader";
 import { Suspense } from "react";
+import FormMimic from "@components/MIMIC/FormMimic";
+import AvatarViewer from "@components/MIMIC/AvatarViewer";
 const VideoPage = () => {
   const [languages, setLanguages] = useState([]);
   const [voices, setVoices] = useState([]);
@@ -15,10 +16,11 @@ const VideoPage = () => {
   const [language, setLanuage] = useState("es-ES");
   const [voice, setVoice] = useState("UTESM");
   const [prompt, setPrompt] = useState("");
+  const [audio_url, setAudio_Url] = useState("");
 
   useEffect(() => {
     const getLanguages = async () => {
-      const response = await fetch("/api/tts");
+      const response = await fetch("/api/tts/languages");
       const { languages } = await response.json();
       setLanguages(languages);
     };
@@ -28,7 +30,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     const getVoices = async () => {
-      const response = await fetch(`/api/tts?language=${language}`);
+      const response = await fetch(`/api/tts/languages/${language}`);
       const { voices } = await response.json();
       setVoices(voices);
     };
@@ -39,7 +41,7 @@ const VideoPage = () => {
 
   useEffect(() => {
     const getVideosUrl = async () => {
-      const response = await fetch("/api/mimic");
+      const response = await fetch("/api/mimic/videosurl");
       const { urls } = await response.json();
       setVideos(urls);
     };
@@ -48,7 +50,7 @@ const VideoPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/tts", {
+    const response = await fetch("/api/tts/synthesizespeech", {
       method: "POST",
       body: JSON.stringify({
         text: prompt,
@@ -57,7 +59,7 @@ const VideoPage = () => {
       }),
     });
     const { audio_url } = await response.json();
-    console.log(audio_url);
+    setAudio_Url(audio_url);
   };
 
   return (
@@ -67,55 +69,14 @@ const VideoPage = () => {
           <SelectLanguages languages={languages} setLanuage={setLanuage} />
           <SelectVoice voices={voices} setVoice={setVoice} />
           <SelectVideo vidoes={videos} setAvatar={setAvatar} />
-          <form
-            onSubmit={handleSubmit}
-            className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-          >
-            <label>
-              <span className="font-satoshi font-semibold text-base text-gray-700">
-                Your Prompt
-              </span>
-
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Write your post here"
-                required
-                className="form_textarea "
-              />
-            </label>
-
-            <div className="flex-end mx-3 mb-5 gap-4">
-              <button
-                type="submit"
-                className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-700"
-                // disabled={processing}
-              >
-                {/* {processing ? "Generating..." : "Generate"} */}
-                Generate
-              </button>
-            </div>
-          </form>
+          <FormMimic
+            prompt={prompt}
+            setPrompt={setPrompt}
+            handleSubmit={handleSubmit}
+          />
         </div>
         <Suspense fallback={<div>Loading repo...</div>}>
-          <div className="mt-1 w-full max-w-lg flex flex-col gap-1 glassmorphism">
-            <div className="h-full max-w-lg">
-              {avatar ? (
-                <video
-                  src={avatar}
-                  controls
-                  width={512}
-                  height={512}
-                  className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-                />
-              ) : (
-                <Loader
-                  desc="Loading video"
-                  className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-                />
-              )}
-            </div>
-          </div>
+          <AvatarViewer avatar={avatar} audio_url={audio_url} />
         </Suspense>
       </div>
     </section>

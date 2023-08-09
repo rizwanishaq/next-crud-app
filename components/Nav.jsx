@@ -25,11 +25,11 @@ const Nav = () => {
       {/* Desktop  Navigation */}
       <div className="sm:flex hidden">
         <div className="flex gap-3 md:gap-5">
-          <Link href="/create-prompt" className="black_btn">
+          {/* <Link href="/create-prompt" className="black_btn">
             Create Post
-          </Link>
+          </Link> */}
 
-          {/* <Grip /> */}
+          <Grip />
         </div>
       </div>
 
@@ -41,11 +41,11 @@ const Nav = () => {
           {toggleDropdown && (
             <div className="dropdown">
               <Link
-                href="/create-prompt"
+                href="/generate-image"
                 className="dropdown_link"
                 onClick={() => setToggleDropdown(false)}
               >
-                Create Prompt
+                Generate Image
               </Link>
             </div>
           )}

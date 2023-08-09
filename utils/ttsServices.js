@@ -2,10 +2,8 @@ import wav from "wav";
 import { v4 as uuidv4 } from "uuid";
 import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader";
-import { NextResponse } from "next/server";
 import { uploadAudio } from "@utils/awsUtils";
 import { deleteFile } from "@utils/utils";
-
 const proto = grpc.loadPackageDefinition(
   protoLoader.loadSync("./protocol/tts.proto", {
     keepCase: true,
@@ -24,10 +22,7 @@ const client = new proto.utopia.texttospeech.v1.TextToSpeech(
   grpc.credentials.createInsecure()
 );
 
-const metadata = new grpc.Metadata();
-metadata.add("request_id", "random_id");
-
-const listLanguages = () => {
+export const listLanguages = () => {
   return new Promise((resolve, reject) => {
     client.ListLanguages({}, metadata, (error, response) => {
       if (error) return reject(error);
@@ -36,7 +31,7 @@ const listLanguages = () => {
   });
 };
 
-const listVoices = (language) => {
+export const listVoices = (language) => {
   const params = { language_code: language };
 
   return new Promise((resolve, reject) => {
@@ -47,7 +42,9 @@ const listVoices = (language) => {
   });
 };
 
-const SynthesizeSpeech = ({ data }) => {
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const SynthesizeSpeech = ({ data }) => {
   const fileName = `${uuidv4()}`;
   const { language, voice, text } = data;
 
@@ -112,41 +109,7 @@ const SynthesizeSpeech = ({ data }) => {
   });
 };
 
-export async function GET(req, { params }) {
-  const { searchParams } = new URL(req.url);
-  const language = searchParams.get("language");
-  if (language) {
-    try {
-      const { voices } = await listVoices(language);
+export const metadata = new grpc.Metadata();
+metadata.add("request_id", "random_id");
 
-      return NextResponse.json({ voices: voices });
-    } catch (error) {
-      console.log(error);
-      return new NextResponse("Internal error", { status: 500 });
-    }
-  }
-
-  try {
-    const { languages } = await listLanguages();
-    return NextResponse.json({ languages: languages });
-  } catch (error) {
-    console.log(error);
-    return new NextResponse("Internal error", { status: 500 });
-  }
-}
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-export async function POST(req) {
-  try {
-    const { language, voice, text } = await req.json();
-
-    const audio_url = await SynthesizeSpeech({
-      data: { language, voice, text },
-    });
-
-    return NextResponse.json({ audio_url: audio_url });
-  } catch (error) {
-    console.log(error);
-    return new NextResponse("Internal error", { status: 500 });
-  }
-}
+export default client;
