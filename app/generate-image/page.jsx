@@ -35,33 +35,22 @@ const GenerateImagePage = () => {
   };
 
   return (
-    <section className="w-full max-w-full flex-start flex-col">
-      <h1 className="head_text text-left">
-        <span className="blue_gradient">Generate Image</span>
-      </h1>
-      <p className="desc text-left max-w-md">
-        Generate and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform
-      </p>
-
+    <section className="w-full max-w-full flex-center flex-col">
       <form
         onSubmit={handleSubmit}
         className="mt-1 w-full max-w-lg flex flex-col gap-1 glassmorphism"
       >
-        {processing ? (
-          <Loader desc="generating image" />
-        ) : (
-          <>
-            <Image
-              width={512}
-              height={512}
-              alt="generated image"
-              src={`data:image/jpg;base64,${image}`}
-              className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
-            />
-          </>
-        )}
-
+        <Image
+          width={512}
+          height={512}
+          alt="generated image"
+          src={
+            processing
+              ? "/assets/icons/loader.svg"
+              : `data:image/jpg;base64,${image}`
+          }
+          className="mt-1 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+        />
         {/* <p className="font-inter text-sm text-gray-500">{prompt}</p> */}
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">

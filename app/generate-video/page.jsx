@@ -63,7 +63,7 @@ const VideoPage = () => {
   };
 
   return (
-    <section className="w-full max-w-full flex-start flex-col">
+    <section className="w-lg max-w-full flex-start flex-col">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div className="mt-1 w-full max-w-lg flex flex-col gap-1 glassmorphism">
           <SelectLanguages languages={languages} setLanuage={setLanuage} />
@@ -76,7 +76,9 @@ const VideoPage = () => {
           />
         </div>
         <Suspense fallback={<div>Loading repo...</div>}>
-          <AvatarViewer avatar={avatar} audio_url={audio_url} />
+          <div className="mt-1 w-full max-w-full gap-2 glassmorphism">
+            <AvatarViewer avatar={avatar} audio_url={audio_url} />
+          </div>
         </Suspense>
       </div>
     </section>
