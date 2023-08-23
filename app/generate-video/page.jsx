@@ -3,50 +3,24 @@ import { useState, useEffect } from "react";
 import SelectLanguages from "@components/SelectLanguages";
 import SelectVideo from "@components/SelectVideo";
 import SelectVoice from "@components/SelectVoice";
-import { Suspense } from "react";
 import FormMimic from "@components/MIMIC/FormMimic";
 import AvatarViewer from "@components/MIMIC/AvatarViewer";
+import { useMimic } from "@hooks/useMimic";
 const VideoPage = () => {
-  const [languages, setLanguages] = useState([]);
-  const [voices, setVoices] = useState([]);
-  const [videos, setVideos] = useState([]);
-  const [avatar, setAvatar] = useState(
-    "https://dialoga-machine-learning.s3.eu-west-1.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_another.mp4"
-  );
-  const [language, setLanuage] = useState("es-ES");
-  const [voice, setVoice] = useState("UTESM");
+  const {
+    videos,
+    languages,
+    language,
+    voices,
+    voice,
+    setLanuage,
+    setVoice,
+    avatar,
+    setAvatar,
+  } = useMimic();
+
   const [prompt, setPrompt] = useState("");
   const [audio_url, setAudio_Url] = useState("");
-
-  useEffect(() => {
-    const getLanguages = async () => {
-      const response = await fetch("/api/tts/languages");
-      const { languages } = await response.json();
-      setLanguages(languages);
-    };
-    getLanguages();
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    const getVoices = async () => {
-      const response = await fetch(`/api/tts/languages/${language}`);
-      const { voices } = await response.json();
-      setVoices(voices);
-    };
-
-    if (language) getVoices();
-    // eslint-disable-next-line
-  }, [language]);
-
-  useEffect(() => {
-    const getVideosUrl = async () => {
-      const response = await fetch("/api/mimic/videosurl");
-      const { urls } = await response.json();
-      setVideos(urls);
-    };
-    getVideosUrl();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,11 +49,9 @@ const VideoPage = () => {
             handleSubmit={handleSubmit}
           />
         </div>
-        <Suspense fallback={<div>Loading repo...</div>}>
-          <div className="mt-1 w-full max-w-full gap-2 glassmorphism">
-            <AvatarViewer avatar={avatar} audio_url={audio_url} />
-          </div>
-        </Suspense>
+        <div className="mt-1 w-full max-w-full gap-2 glassmorphism">
+          <AvatarViewer avatar={avatar} audio_url={audio_url} />
+        </div>
       </div>
     </section>
   );

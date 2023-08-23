@@ -1,6 +1,7 @@
 import Nav from "@components/Nav";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import MimicProvider from "@contexts/MimicContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({ children }) {
         <div className="gradient" />
         <main className="app">
           <Nav />
-          {children}
+          <MimicProvider>{children}</MimicProvider>
         </main>
       </body>
     </html>
