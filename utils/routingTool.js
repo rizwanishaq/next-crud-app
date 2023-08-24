@@ -6,9 +6,9 @@ export const tools = [
     href: "/generate-image",
   },
   {
-    label: "Music Generation",
+    label: "Video Generation from Image",
     icon: Music,
-    href: "/music",
+    href: "/generate-video-from-image",
   },
   {
     label: "Video Generation",
