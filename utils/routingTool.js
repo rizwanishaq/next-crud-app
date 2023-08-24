@@ -1,4 +1,4 @@
-import { ImageIcon, Music, VideoIcon } from "lucide-react";
+import { ImageIcon, Music, VideoIcon, FileImage } from "lucide-react";
 export const tools = [
   {
     label: "Image Generation",
@@ -7,7 +7,7 @@ export const tools = [
   },
   {
     label: "Video Generation from Image",
-    icon: Music,
+    icon: FileImage,
     href: "/generate-video-from-image",
   },
   {

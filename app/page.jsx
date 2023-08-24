@@ -2,6 +2,7 @@
 import { tools } from "@utils/routingTool";
 import { useRouter } from "next/navigation";
 import { cn } from "@utils/utils";
+
 const Home = () => {
   const router = useRouter();
   return (

@@ -3,10 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Grip } from "lucide-react";
+import WeatherCard from "./WeatherCard";
 
 const Nav = () => {
-  const isUserLoggedIn = true;
-
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   return (
@@ -19,24 +18,20 @@ const Nav = () => {
           height={30}
           className="object-contain hover:animate-spin"
         />
-        <p className="logo_text">RiIsBiTech</p>
+        <p className="logo_text">Utopia</p>
       </Link>
 
       {/* Desktop  Navigation */}
       <div className="sm:flex hidden">
-        <div className="flex gap-3 md:gap-5">
-          {/* <Link href="/create-prompt" className="black_btn">
-            Create Post
-          </Link> */}
-
-          <Grip />
+        <div className="flex gap-2 md:gap-2">
+          <WeatherCard />
         </div>
       </div>
 
       {/* Mobile Navigation  */}
       <div className="sm:hidden flex relative">
         <div className="flex">
-          <Grip onClick={() => setToggleDropdown((prev) => !prev)} />
+          <WeatherCard onClick={() => setToggleDropdown((prev) => !prev)} />
 
           {toggleDropdown && (
             <div className="dropdown">

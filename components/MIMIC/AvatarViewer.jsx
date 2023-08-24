@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-const AvatarViewer = ({ avatar, audio_url }) => {
+const AvatarViewer = ({ avatar, audio_url, hd }) => {
   const [avatarUrl, setAvatarUrl] = useState("");
   const [processing, setProcessing] = useState(false);
 
@@ -13,7 +13,7 @@ const AvatarViewer = ({ avatar, audio_url }) => {
         body: JSON.stringify({
           avatar: avatar,
           audio_url: audio_url,
-          hd: true,
+          hd: hd,
         }),
       });
 

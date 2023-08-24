@@ -12,6 +12,7 @@ const MimicProvider = ({ children }) => {
   const [avatar, setAvatar] = useState(
     "https://dialoga-machine-learning.s3.eu-west-1.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_another.mp4"
   );
+  const [hd, setHd] = useState(false);
 
   useEffect(() => {
     const getLanguages = async () => {
@@ -55,6 +56,8 @@ const MimicProvider = ({ children }) => {
         setVoice,
         avatar,
         setAvatar,
+        hd,
+        setHd,
       }}
     >
       {children}

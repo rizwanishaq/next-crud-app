@@ -17,6 +17,8 @@ const VideoPage = () => {
     setVoice,
     avatar,
     setAvatar,
+    hd,
+    setHd,
   } = useMimic();
 
   const [prompt, setPrompt] = useState("");
@@ -47,10 +49,12 @@ const VideoPage = () => {
             prompt={prompt}
             setPrompt={setPrompt}
             handleSubmit={handleSubmit}
+            hd={hd}
+            setHd={setHd}
           />
         </div>
         <div className="mt-1 w-full max-w-full gap-2 glassmorphism">
-          <AvatarViewer avatar={avatar} audio_url={audio_url} />
+          <AvatarViewer avatar={avatar} audio_url={audio_url} hd={hd} />
         </div>
       </div>
     </section>

@@ -2,22 +2,12 @@
 import { useState, useRef, useEffect } from "react";
 import SelectLanguages from "@components/SelectLanguages";
 import SelectVoice from "@components/SelectVoice";
-import AvatarViewer from "@components/MIMIC/AvatarViewer";
 import { useMimic } from "@hooks/useMimic";
-import { GrAttachment } from "react-icons/gr";
+import { Upload } from "lucide-react";
 import Image from "next/image";
 const VideoPage = () => {
-  const {
-    videos,
-    languages,
-    language,
-    voices,
-    voice,
-    setLanuage,
-    setVoice,
-    avatar,
-    setAvatar,
-  } = useMimic();
+  const { languages, language, voices, voice, setLanuage, setVoice } =
+    useMimic();
 
   const [prompt, setPrompt] = useState("");
   const [audiourl, setAudioUrl] = useState("");
@@ -109,7 +99,8 @@ const VideoPage = () => {
               <div>
                 <label>
                   <span>
-                    <GrAttachment size={20} />
+                    {/* <GrAttachment size={20} /> */}
+                    <Upload className="hover:cursor-pointer" />
                   </span>
 
                   <input
