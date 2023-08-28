@@ -1,4 +1,4 @@
-import { ImageIcon, Bot, VideoIcon, FileImage } from "lucide-react";
+import { ImageIcon, Bot, VideoIcon, FileImage, UserCog2 } from "lucide-react";
 export const tools = [
   {
     label: "Image Generation",
@@ -19,5 +19,10 @@ export const tools = [
     label: "TTS Avatar",
     icon: Bot,
     href: "/tts-avatar",
+  },
+  {
+    label: "Real-time Avatar",
+    icon: UserCog2,
+    href: "/real-time-avatar",
   },
 ];

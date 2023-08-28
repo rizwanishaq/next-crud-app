@@ -58,7 +58,6 @@ const page = () => {
     "https://dialoga-machine-learning.s3.eu-west-1.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_Screenshot+from+2023-05-15+16-01-45-0-Enhanced-Animated.mp4",
     "https://dialoga-machine-learning.s3.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_00024-3290188462-0-Enhanced-Animated.mp4",
     "https://dialoga-machine-learning.s3.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_00053-2365829893-0-Enhanced-Animated.mp4",
-    "https://dialoga-machine-learning.s3.amazonaws.com/mimic/videos/eduardo_bravo/eduardo_bravo_IMG_1193.mp4 ",
   ];
 
   const [avatar, setAvatar] = useState(
@@ -260,26 +259,6 @@ const page = () => {
             <SelectLanguages languages={languages} setLanuage={setLanuage} />
             <SelectVoice voices={voices} setVoice={setVoice} />
             <SelectVideo vidoes={avatars} setAvatar={setAvatar} />
-            {/* <div className="flex-between mx-3 mb-5 gap-4">
-              <div>
-                <span>
-                  <button
-                    type="submit"
-                    className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-700"
-                  >
-                    start
-                  </button>
-                </span>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-700"
-                >
-                  stop
-                </button>
-              </div>
-            </div> */}
           </div>
           <Image
             width={256}
