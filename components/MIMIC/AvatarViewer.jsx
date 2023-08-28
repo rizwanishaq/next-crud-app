@@ -42,7 +42,7 @@ const AvatarViewer = ({ avatar, audio_url, hd }) => {
           height={512}
           alt="generated image"
           src="/assets/icons/loader.svg"
-          className="glassmorphism"
+          className="glassmorphism aspect-video"
         />
       )}
     </div>

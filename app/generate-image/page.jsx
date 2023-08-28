@@ -2,9 +2,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Loader from "@components/Loader";
-
-// import axios from "axios";
 
 const GenerateImagePage = () => {
   const router = useRouter();

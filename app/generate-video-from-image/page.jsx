@@ -131,7 +131,7 @@ const VideoPage = () => {
                 controls
                 width={512}
                 height={512}
-                className="glassmorphism"
+                className="glassmorphism aspect-video"
               />
             ) : (
               <Image
@@ -139,7 +139,7 @@ const VideoPage = () => {
                 height={512}
                 alt="generated image"
                 src="/assets/icons/loader.svg"
-                className="glassmorphism"
+                className="glassmorphism aspect-video"
               />
             )}
           </div>
