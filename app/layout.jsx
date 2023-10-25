@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="main"></div>
+        {/* <div className="main"></div> */}
         <div className="gradient" />
         <main className="app">
           <WeatherContextProvider>

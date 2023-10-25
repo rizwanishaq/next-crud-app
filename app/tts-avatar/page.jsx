@@ -252,9 +252,9 @@ const page = () => {
   };
 
   return (
-    <section className="w-full max-w-full flex-center flex-col">
+    <section className="w-full max-w-full flex flex-center ">
       <div className="mt-1 w-full max-w-2xl flex flex-col gap-2 glassmorphism">
-        <div className="flex justify-between">
+        <div className="flex flex-col-reverse md:flex-row justify-between">
           <div className="w-1/2">
             <SelectLanguages languages={languages} setLanuage={setLanuage} />
             <SelectVoice voices={voices} setVoice={setVoice} />
@@ -269,7 +269,7 @@ const page = () => {
                 ? `data:image/jpeg;base64,${responseData.image}`
                 : "/assets/images/logo.svg"
             }
-            className="max-w-xs rounded-full object-contain"
+            className="max-w-xs rounded-full border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-2"
           />
         </div>
         <div

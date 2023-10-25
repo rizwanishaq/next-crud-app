@@ -26,7 +26,7 @@ const WeatherCard = () => {
       <span>
         {location.weather ? <img src={location.weather.icon} alt="" /> : ""}
       </span>
-      <div className="absolute inline-flex items-center justify-center w-10 h-10 text-bold text-black bg-white border-white rounded-full -top-3 right-3 bg-transparent">
+      <div className="absolute inline-flex items-center justify-center w-10 h-10 text-bold text-black bg-white border-white rounded-full -top-4 right-3 bg-transparent">
         {location.city}
       </div>
     </button>
