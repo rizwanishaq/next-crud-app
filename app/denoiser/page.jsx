@@ -81,6 +81,10 @@ const page = () => {
 
       ws.current.onmessage = (event) => {
         const { audio_contents } = JSON.parse(event.data);
+
+        setResponseData({
+          audio_contents,
+        });
       };
       ws.current.onclose = () => {
         console.log("stream closed");
