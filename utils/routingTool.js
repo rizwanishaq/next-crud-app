@@ -37,4 +37,9 @@ export const tools = [
     icon: UserPlus,
     href: "/denoiser",
   },
+  {
+    label: "Speech-to-Text",
+    icon: UserPlus,
+    href: "/speech-to-text",
+  },
 ];
